@@ -1,5 +1,6 @@
 package com.chamika.Employee.Manager.Angular.and.Spring.Boot.service;
 
+import com.chamika.Employee.Manager.Angular.and.Spring.Boot.exception.UserNotFoundException;
 import com.chamika.Employee.Manager.Angular.and.Spring.Boot.model.Employee;
 import com.chamika.Employee.Manager.Angular.and.Spring.Boot.repo.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class EmployeeService {
         return employeeRepo.save(employee);
     }
 
+    public Employee findEmployeeById(Long id){
+        return employeeRepo.findEmployeeById(id).orElseThrow(() -> new UserNotFoundException("User by id "+id+"was not found"));
+    }
     public void deleteEmployee(Long id){
         employeeRepo.deleteEmployeeById(id);
     }
